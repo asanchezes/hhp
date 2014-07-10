@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="en" ng-app="angularPerson">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>HHP App</title>
+	<link rel="stylesheet" href="stylesheets/bootstrap.min.css">
+</head>
+<body ng-controller="mainController">
+	<div class="container">
+		<!--Cabecera-->
+		<div class="text-center">
+			<h2>Person <span class="label label-info">{{ persons.length }}</span></h2>
+		</div>
+		<div class="bs-example">
+		<table class="table table-hover">
+		<thead>
+		<tr>
+		<th>Nick</th>
+		<th>Name</th>
+		<th>Surname</th>
+	
+		</tr>
+		</thead>
+		<tbody>
+		<tr ng-repeat="person in persons">
+		<td>{{person.nick}}</td>
+		<td>{{person.name}}</td>
+		<td>{{person.surname}}</td>
+		<td><button type="button" class="btn btn-primary btn-sm" ng-click="loadPerson(person._id)">Edit</button>
+		<button type="button" class="btn btn-danger btn-sm" ng-click="deletePerson(person._id)">Delete</button></td<
+		</tr>
+		</tbody>
+		</table>
+		</div>
+
+		<!--Lista de Todos
+		<div id="person-list" class="row">
+			<div class="col-sm-4 col-sm-offset-4">
+				<div class="checkbox" ng-repeat="person in persons">
+					<label>
+						<input type="checkbox" ng-click="deletePerson(person._id)"> 
+						{{ person.name }} {{ person.surname }}
+					</label>
+				</div>
+			</div>
+		</div>
+-->
+
+		<!--Formulario para insertar nuevos Todo-->
+		<div id="person-form" class="row">
+			<div>
+				<form role="form">
+				<input type="hidden" id="id" class="form-control" ng-model="formData._id">
+				 <div class="form-group">
+    			 	<label for="lnick">Nick Name</label>
+    			 	<input type="text" id="nick" class="form-control" placeholder="Nick" ng-model="formData.nick">
+  				</div>	
+  				<div class="form-group">
+    			 	<label for="lname">Name</label>
+    			 	<input type="text" id="name" class="form-control" placeholder="Name" ng-model="formData.name">
+  				</div>	
+  				<div class="form-group">
+    			 	<label for="lSurname">Surname</label>
+    			 	<input type="text" id="surname" class="form-control" placeholder="Surname" ng-model="formData.surname">
+  				</div>	
+  				
+  				
+
+					<!-- <button id="aceptar" class="btn btn-default" ng-click="{{action}}">{{buttonText}}</button> -->
+					<button id="AddNew" class="btn btn-default" ng-click="create()">Add New</button> 
+					<button id="Update" class="btn btn-default" ng-click="update(formData._id)">Save</button> 
+					
+					
+				</form>
+			</div>
+		</div>
+	</div>
+
+	<script src="javascripts/jquery.min.js"></script>
+	<script src="javascripts/angular.min.js"></script>
+	<script src="javascripts/main.js"></script>
+</body>
+</html>
