@@ -7,48 +7,42 @@
 	<link rel="stylesheet" href="stylesheets/bootstrap.min.css">
 </head>
 <body ng-controller="mainController">
-	<div class="container">
-		<!--Cabecera-->
-		<div class="text-center">
-			<h2>Person <span class="label label-info">{{ persons.length }}</span></h2>
+	<script src="javascripts/jquery.min.js"></script>
+	<script src="javascripts/bootstrap.min.js"></script>
+	<div ng-include src="'navbar.html'"></div>
+	
+	<div id="div_head" class="text-center" >
+			<h3>Person</h3>
 		</div>
-		<div class="bs-example">
+	<div id="div_container" class="container">
+		<!--Cabecera-->
+		
+		
+		<button type="button" id="bNew" class="btn btn-primary btn-sm" ng-click="newValue()">New</button></td>
+		
+		<div id="div_list"class="bs-example">
 		<table class="table table-hover">
 		<thead>
 		<tr>
-		<th>Nick</th>
 		<th>Name</th>
-		<th>Surname</th>
-	
+
 		</tr>
 		</thead>
 		<tbody>
 		<tr ng-repeat="person in persons">
-		<td>{{person.nick}}</td>
-		<td>{{person.name}}</td>
-		<td>{{person.surname}}</td>
+		<td>{{person.name}} {{person.surname}} </td>
 		<td><button type="button" class="btn btn-primary btn-sm" ng-click="loadPerson(person._id)">Edit</button>
-		<button type="button" class="btn btn-danger btn-sm" ng-click="deletePerson(person._id)">Delete</button></td<
+		<!-- <button type="button" class="btn btn-danger btn-sm" ng-click="deletePerson(person._id)">Delete</button></td> -->
+		 <button type="button" id="bdel" class="btn btn-danger btn-sm" ng-click="deletePerson(person._id)">Delete</button></td>
 		</tr>
 		</tbody>
+		
 		</table>
 		</div>
 
-		<!--Lista de Todos
-		<div id="person-list" class="row">
-			<div class="col-sm-4 col-sm-offset-4">
-				<div class="checkbox" ng-repeat="person in persons">
-					<label>
-						<input type="checkbox" ng-click="deletePerson(person._id)"> 
-						{{ person.name }} {{ person.surname }}
-					</label>
-				</div>
-			</div>
-		</div>
--->
-
+ 
 		<!--Formulario para insertar nuevos Todo-->
-		<div id="person-form" class="row">
+		<div id="div_form" class="row">
 			<div>
 				<form role="form">
 				<input type="hidden" id="id" class="form-control" ng-model="formData._id">
@@ -68,8 +62,9 @@
   				
 
 					<!-- <button id="aceptar" class="btn btn-default" ng-click="{{action}}">{{buttonText}}</button> -->
-					<button id="AddNew" class="btn btn-default" ng-click="create()">Add New</button> 
-					<button id="Update" class="btn btn-default" ng-click="update(formData._id)">Save</button> 
+					<!-- <button id="AddNew" class="btn btn-default" ng-click="create()">Add New</button>  -->
+					<button id="Save" class="btn btn-default" ng-click="update(formData._id)">Save</button> 
+					<button id="Cancel" class="btn btn-default" ng-click="cancel()">Cancel</button> 
 					
 					
 				</form>
@@ -77,8 +72,11 @@
 		</div>
 	</div>
 
-	<script src="javascripts/jquery.min.js"></script>
+	<script src="javascripts/bootbox.min.js"></script>
+
 	<script src="javascripts/angular.min.js"></script>
-	<script src="javascripts/main.js"></script>
+	
+	<script src="javascripts/person_c.js"></script>
+	
 </body>
 </html>
