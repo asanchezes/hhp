@@ -20,8 +20,26 @@ function mainController($scope, $http) {
 	
 	$scope.init=function()
 	{
-		// $scope.buttonText='Add New';
-		// $scope.action='create()';
+		$scope.viewList();
+	}
+	
+	$scope.viewForm=function()
+	{
+		$("#div_list").hide();
+		$("#div_form").show();
+	}
+	
+	$scope.viewList=function()
+	{
+		$("#div_list").show();
+		$("#div_form").hide();
+	}
+	
+	$scope.newValue=function()
+	{
+		$scope.formData = {};
+		$scope.viewForm();
+		
 	}
 	
 	$scope.refresca= function(){
@@ -33,6 +51,12 @@ function mainController($scope, $http) {
 		.error(function(data) {
 			console.log('Error: ' + data);
 		});
+		
+	}
+	
+	$scope.cancel= function(){
+		$scope.formData = {};
+		$scope.viewList();
 		
 	}
 
@@ -51,7 +75,13 @@ function mainController($scope, $http) {
 	};
 	
 	$scope.update = function(id){
-		$http.post('/persons/update/'+id, $scope.formData)
+		if (id==null)
+		{
+			$scope.create();
+		}
+		else
+		{
+			$http.post('/persons/update/'+id, $scope.formData)
 			.success(function(data) {
 				$scope.formData = {};
 				console.log(data);
@@ -60,21 +90,34 @@ function mainController($scope, $http) {
 			.error(function(data) {
 				console.log('Error:' + data);
 			});
+		}
+		$scope.viewList();
 	};
 
-	// Borra un TODO despues de checkearlo como acabado
+	
 	$scope.deletePerson= function(id) {
-		$http.delete('/persons/del/' + id)
-			.success(function(data) {
-				$scope.persons = data;
-				console.log(data);
-				$scope.refresca();
-				
-			})
-			.error(function(data) {
-				console.log('Error:' + data);
-			});
+		
+		bootbox.confirm("Are you sure?", function(result) {
+			console.log(result);
+			if (result){
+			
+				$http.delete('/persons/del/' + id)
+				.success(function(data) {
+					$scope.persons = data;
+					console.log(data);
+					$scope.refresca();
+					
+				})
+				.error(function(data) {
+					console.log('Error:' + data);
+				});
+			}
+			  
+		});
+		
 	};
+	
+	
 	
 	$scope.loadPerson= function(id) {
 		$http.get('/persons/list/' + id)
@@ -83,10 +126,12 @@ function mainController($scope, $http) {
 				console.log(data);
 				$scope.buttonText='Change';
 				$scope.action='update()';
+				$scope.viewForm();
 				
 			})
 			.error(function(data) {
 				console.log('Error:' + data);
 			});
+		
 	};
 }
