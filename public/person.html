@@ -16,9 +16,18 @@
 		</div>
 	<div id="div_container" class="container">
 		<!--Cabecera-->
-		
-		
-		<button type="button" id="bNew" class="btn btn-primary btn-sm" ng-click="newValue()">New</button></td>
+
+		<div id="div_hButton" class="btn-group">
+			<button type="button" class="btn btn-default" id="bNew" ng-click="newValue()">
+				<span class="glyphicon glyphicon-plus"></span> New
+			</button>
+			<button type="button" class="btn btn-default" id="bFind" ng-click="find()">
+				<span class="glyphicon glyphicon-search"></span> Find
+			</button>
+			
+		</div>
+
+		<!-- <button type="button" id="bNew" class="btn btn-primary btn-sm" ng-click="newValue()">New</button></td> -->
 		
 		<div id="div_list"class="bs-example">
 		<table class="table table-hover">

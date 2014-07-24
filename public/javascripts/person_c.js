@@ -27,12 +27,14 @@ function mainController($scope, $http) {
 	{
 		$("#div_list").hide();
 		$("#div_form").show();
+		$("#div_hButton").hide();
 	}
 	
 	$scope.viewList=function()
 	{
 		$("#div_list").show();
 		$("#div_form").hide();
+		$("#div_hButton").show();
 	}
 	
 	$scope.newValue=function()
