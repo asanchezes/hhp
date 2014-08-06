@@ -1,6 +1,6 @@
 //public/main.js
 
-var entity='person';
+var entity='variable';
 var angularModule = angular.module(entity+"Module", []);
 
 

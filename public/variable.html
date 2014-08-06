@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" ng-app="personModule">
+<html lang="en" ng-app="variableModule">
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
@@ -12,7 +12,7 @@
 	<div ng-include src="'navbar.html'"></div>
 	
 	<div id="div_head" class="text-center" >
-			<h3>Person</h3>
+			<h3>Variable</h3>
 		</div>
 	<div id="div_container" class="container">
 		<!--Cabecera-->
@@ -33,16 +33,17 @@
 		<table class="table table-hover">
 		<thead>
 		<tr>
+		<th>Code</th>
 		<th>Name</th>
-
 		</tr>
 		</thead>
 		<tbody>
-		<tr ng-repeat="person in listEntity">
-		<td>{{person.name}} {{person.surname}} </td>
-		<td><button type="button" class="btn btn-primary btn-sm" ng-click="load(person._id)">Edit</button>
-		<!-- <button type="button" class="btn btn-danger btn-sm" ng-click="deletePerson(person._id)">Delete</button></td> -->
-		 <button type="button" id="bdel" class="btn btn-danger btn-sm" ng-click="delete(person._id)">Delete</button></td>
+		<tr ng-repeat="variable in listEntity">
+		<td>{{variable.code}}</td>
+		<td>{{variable.name}}</td>
+		<td><button type="button" class="btn btn-primary btn-sm" ng-click="load(variable._id)">Edit</button>
+		<!-- <button type="button" class="btn btn-danger btn-sm" ng-click="deletePerson(variable._id)">Delete</button></td> -->
+		 <button type="button" id="bdel" class="btn btn-danger btn-sm" ng-click="delete(variable._id)">Delete</button></td>
 		</tr>
 		</tbody>
 		
@@ -56,17 +57,14 @@
 				<form role="form">
 				<input type="hidden" id="id" class="form-control" ng-model="formData._id">
 				 <div class="form-group">
-    			 	<label for="lnick">Nick Name</label>
-    			 	<input type="text" id="nick" class="form-control" placeholder="Nick" ng-model="formData.nick">
+    			 	<label for="lcode">Code</label>
+    			 	<input type="text" id="code" class="form-control" placeholder="Code" ng-model="formData.code">
   				</div>	
-  				<div class="form-group">
+  				 <div class="form-group">
     			 	<label for="lname">Name</label>
     			 	<input type="text" id="name" class="form-control" placeholder="Name" ng-model="formData.name">
   				</div>	
-  				<div class="form-group">
-    			 	<label for="lSurname">Surname</label>
-    			 	<input type="text" id="surname" class="form-control" placeholder="Surname" ng-model="formData.surname">
-  				</div>	
+  				
   				
   				
 
@@ -85,7 +83,7 @@
 
 	<script src="javascripts/angular.min.js"></script>
 	
-	<script src="javascripts/person_c.js"></script>
+	<script src="javascripts/variable_c.js"></script>
 	
 </body>
 </html>
