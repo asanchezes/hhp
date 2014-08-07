@@ -14,6 +14,7 @@ var db = mongo.db("mongodb://localhost:27017/hhp", {native_parser:true});
 var routes = require('./routes/index');
 var person = require('./routes/person');
 var variable = require('./routes/variable');
+var observation = require('./routes/observation');
 
 var app = express();
 
@@ -39,6 +40,7 @@ app.use(function(req,res,next){
 app.use('/', routes);
 app.use('/person', person);
 app.use('/variable', variable);
+app.use('/observation', observation);
 
 
 

@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="en" ng-app="observationModule">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>HHP App</title>
+	<link rel="stylesheet" href="stylesheets/bootstrap.min.css">
+	
+</head>
+<body ng-controller="mainController">
+	<script src="javascripts/jquery.min.js"></script>
+	<script src="javascripts/bootstrap.min.js"></script>
+	<div ng-include src="'navbar.html'"></div>
+	
+	<div id="div_head" class="text-center" >
+			<h3>Observation</h3>
+		</div>
+	<div id="div_container" class="container">
+		<!--Cabecera-->
+
+		<div id="div_hButton" class="btn-group">
+			<button type="button" class="btn btn-default" id="bNew" ng-click="newValue()">
+				<span class="glyphicon glyphicon-plus"></span> New
+			</button>
+			<button type="button" class="btn btn-default" id="bFind" ng-click="find()">
+				<span class="glyphicon glyphicon-search"></span> Find
+			</button>
+			
+		</div>
+
+		<!-- <button type="button" id="bNew" class="btn btn-primary btn-sm" ng-click="newValue()">New</button></td> -->
+		
+	<div id="div_list"class="bs-example">
+		<table class="table table-hover">
+		<thead>
+		<tr>
+		<th>Person</th>
+		<th>Value</th>
+		</tr>
+		</thead>
+		<tbody>
+		<tr ng-repeat="variable in listEntity">
+		<td>{{variable.person_id}}</td>
+		<td>{{variable.value}}</td>
+		<td><button type="button" class="btn btn-primary btn-sm" ng-click="load(variable._id)">Edit</button>
+		<!-- <button type="button" class="btn btn-danger btn-sm" ng-click="deletePerson(variable._id)">Delete</button></td> -->
+		 <button type="button" id="bdel" class="btn btn-danger btn-sm" ng-click="delete(variable._id)">Delete</button></td>
+		</tr>
+		</tbody>
+		
+		</table>
+		</div>
+
+ 
+	
+		<div id="div_form" class="row">
+			<div>
+				<form role="form">
+				<input type="hidden" id="id" class="form-control" ng-model="formData._id">
+				 <div class="form-group">
+    			 	<label for="lcode">Code</label>
+    			 	<input type="text" id="code" class="form-control" placeholder="Value" ng-model="formData.value">
+  				</div>	
+  					
+  				<div class="form-group">
+    			 	<label for="lname">Person</label>
+    			 	
+    			 	<select class="form-control" ng-model="formData.person_id"
+  			 	 
+   			 			ng-options="person._id as person.nick for person in listPerson">
+    			 	 </select>
+    			 	
+    			 </div>	
+  				
+  				
+  				
+
+					<!-- <button id="aceptar" class="btn btn-default" ng-click="{{action}}">{{buttonText}}</button> -->
+					<!-- <button id="AddNew" class="btn btn-default" ng-click="create()">Add New</button>  -->
+					<button id="Save" class="btn btn-default" ng-click="update(formData._id)">Save</button> 
+					<button id="Cancel" class="btn btn-default" ng-click="cancel()">Cancel</button> 
+					
+					
+				</form>
+			</div>
+		</div>
+	</div>
+
+	<script src="javascripts/bootbox.min.js"></script>
+
+	<script src="javascripts/angular.min.js"></script>
+	
+	<script src="javascripts/observation_c.js"></script>
+	
+	
+</body>
+</html>
