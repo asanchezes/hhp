@@ -9,11 +9,13 @@ function mainController($scope, $http) {
 	$scope.formData = {};
 	
 	
-	$http.get('/'+entity+'/list')
+	
+	$http.get('/'+entity+'/listE')
 		.success(function(data) {
 			$scope.listEntity = data;
 			console.log(data);
 			$scope.loadCmbPerson();
+			$scope.loadCmbVariable();
 			$scope.init();
 		})
 		.error(function(data) {
@@ -32,6 +34,18 @@ function mainController($scope, $http) {
 		$http.get('/person/list')
 		.success(function(data) {
 			$scope.listPerson = data;
+			console.log(data);
+		})
+		.error(function(data) {
+			console.log('Error: ' + data);
+		});
+	}
+	
+	$scope.loadCmbVariable=function()
+	{
+		$http.get('/variable/list')
+		.success(function(data) {
+			$scope.listVariable = data;
 			console.log(data);
 		})
 		.error(function(data) {
@@ -61,7 +75,7 @@ function mainController($scope, $http) {
 	}
 	
 	$scope.refresca= function(){
-		$http.get('/'+entity+'/list')
+		$http.get('/'+entity+'/listE')
 		.success(function(data) {
 			$scope.listEntity = data;
 			console.log(data)
@@ -152,4 +166,8 @@ function mainController($scope, $http) {
 			});
 		
 	};
+	
+	
+	
+	
 }

@@ -35,16 +35,18 @@
 		<thead>
 		<tr>
 		<th>Person</th>
+		<th>Variable</th>
 		<th>Value</th>
 		</tr>
 		</thead>
 		<tbody>
-		<tr ng-repeat="variable in listEntity">
-		<td>{{variable.person_id}}</td>
-		<td>{{variable.value}}</td>
-		<td><button type="button" class="btn btn-primary btn-sm" ng-click="load(variable._id)">Edit</button>
+		<tr ng-repeat="observation in listEntity">
+	    <td>{{observation.person.nick}}</td>
+	    <td>{{observation.variable.name}}</td>
+		<td>{{observation.value}}</td>
+		<td><button type="button" class="btn btn-primary btn-sm" ng-click="load(observation._id)">Edit</button>
 		<!-- <button type="button" class="btn btn-danger btn-sm" ng-click="deletePerson(variable._id)">Delete</button></td> -->
-		 <button type="button" id="bdel" class="btn btn-danger btn-sm" ng-click="delete(variable._id)">Delete</button></td>
+		 <button type="button" id="bdel" class="btn btn-danger btn-sm" ng-click="delete(observation._id)">Delete</button></td>
 		</tr>
 		</tbody>
 		
@@ -57,10 +59,7 @@
 			<div>
 				<form role="form">
 				<input type="hidden" id="id" class="form-control" ng-model="formData._id">
-				 <div class="form-group">
-    			 	<label for="lcode">Code</label>
-    			 	<input type="text" id="code" class="form-control" placeholder="Value" ng-model="formData.value">
-  				</div>	
+				 
   					
   				<div class="form-group">
     			 	<label for="lname">Person</label>
@@ -71,6 +70,21 @@
     			 	 </select>
     			 	
     			 </div>	
+    			 
+    			 <div class="form-group">
+    			 	<label for="lname">Variable</label>
+    			 	
+    			 	<select class="form-control" ng-model="formData.variable"
+  			 	 
+   			 			ng-options="variable.name for variable in listVariable">
+    			 	 </select>
+    			 	
+    			 </div>
+    			 
+    			 <div class="form-group">
+    			 	<label for="lcode">Code</label>
+    			 	<input type="text" id="code" class="form-control" placeholder="Value" ng-model="formData.value">
+  				</div>	
   				
   				
   				

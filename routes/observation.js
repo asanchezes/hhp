@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var document='observation';
+var async=require('async');
 
 
 /*
@@ -13,6 +14,148 @@ router.get('/list', function(req, res) {
     });
 });
 
+
+
+
+router.get('/listB', function(req, res) {
+    var db = req.db;
+    var person;
+    var items=new Array();
+    ObjectID = require('mongoskin').ObjectID;
+    
+
+    function writeResult(items)
+    {
+    	console.log(items[items.length-1]);
+    	res.writeHead(200, {"Content-Type": "text/html"});
+        res.write("Hola Mundo");
+        res.end('');
+    }
+    
+    function procList(err,resultCursor)
+    {
+    	
+        	var first=true;
+        	//res.writeHead(200, { 'Content-Type': 'application/json' });   
+            resultCursor.each(function(err, item) {
+            	
+            	console.log('registres: '+resultCursor.count());
+            	
+            	function getPerson(item,first)
+                {
+            		
+                	if (item)
+                	{
+                		var id=item.person_id;
+	                	ObjectID = require('mongoskin').ObjectID;
+	                	
+	                	db.collection('person').findById(ObjectID(id),function(err, doc) {
+	                		
+	                		item.person=doc;
+	                		console.log(item);
+	                		items[items.length]=item;
+	                		//res.write(first?'':',');
+	                        //res.write(JSON.stringify(item));
+	                        console.log(items.length);		
+	                	}
+	                	
+	                	);	
+                	} else writeResult(items);
+                	
+                }
+            	
+            	/*
+            	if (item) {
+            		
+            		getPerson(item.person_id,first);
+            			
+            		if (first) {first=false;}
+            		
+                } else {writeResult(items);}
+            	
+            	*/
+            	
+            	getPerson(item,first);
+            	if (first) {first=false;}
+            }
+          
+            );
+            
+            
+        	
+    	
+    	
+    }
+    
+    
+     db.collection(document).find({}, function(err, resultCursor) {
+    	 procList(err, resultCursor);
+    	 
+     }	 
+     )
+     
+     ;
+     
+     
+});
+
+
+router.get('/listE', function(req, res) {
+	var db = req.db;
+	var person;
+	var itemsB=new Array();
+	
+	
+	function writeResult()
+    {
+		
+		/*
+    	console.log('Final');
+    	res.writeHead(200, {"Content-Type": "text/html"});
+        res.write("Hola Mundo");
+        res.end('');
+        */
+		res.json(itemsB);
+    }
+	
+
+	ObjectID = require('mongoskin').ObjectID;
+	db.collection(document).find().toArray(function (err, items,callback) {
+        
+	
+		 async.forEach(items, function(item, callback) { //The second argument (callback) is the "task callback" for a specific messageId
+		        
+			
+			if (item)
+			{
+			var id=item.person_id;
+			ObjectID = require('mongoskin').ObjectID;
+         	console.log(id);
+         	
+         	db.collection('person').findById(ObjectID(id),function(err, doc) {
+         		
+         		item.person=doc;
+         		//console.log(item);
+         		itemsB[itemsB.length]=item;
+         	    		
+                 callback();
+         	});
+         	
+			} else callback();
+			
+		 }	
+		 	 
+			, function(err) {
+
+				writeResult();
+		 
+			}
+		        
+	);
+	
+});
+	
+});
 
 /*
  * add
